@@ -1,12 +1,7 @@
 package com.animoto.android.dgv;
 
-import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Hashtable;
-
-import com.animoto.android.dgv.DraggableGridViewCell.CellDataNotSetException;
-import com.animoto.android.dgvdbsample.model.ORMHelper;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,21 +11,22 @@ import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
+import com.animoto.android.dgv.DraggableGridViewCell.CellDataNotSetException;
+import com.animoto.android.dgvdbsample.model.ORMHelper;
+
 public class DraggableGridView extends AdapterView implements
-		View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
+View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 	// layout vars
 	private static final int TOP_ROW_PADDING = 4;
 	private static final int BOTTOM_ROW_PADDING = 4;
@@ -63,7 +59,7 @@ public class DraggableGridView extends AdapterView implements
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		((Activity) context).getWindowManager().getDefaultDisplay()
-				.getMetrics(metrics);
+		.getMetrics(metrics);
 		dpi = metrics.densityDpi;
 		Log.i(LOG_TAG, "finished creating DraggableGridView widget");
 	}
@@ -74,6 +70,7 @@ public class DraggableGridView extends AdapterView implements
 	}
 
 	protected Runnable updateTask = new Runnable() {
+		@Override
 		public void run() {
 			if (dragged != -1) {
 				if (lastY < padding * 3 && scroll > 0)
@@ -107,13 +104,13 @@ public class DraggableGridView extends AdapterView implements
 	 * Adapter view overrides
 	 */
 
-	 @Override
-	    public void setAdapter(Adapter adapter) {
-	    	if (!(adapter instanceof DraggableGridViewAdapter)) throw new IllegalArgumentException("DraggableGridView requires an adapter that is a subclass of DraggableGridViewAdapter");
-	    	this.mAdapter = (DraggableGridViewAdapter)adapter;    	
-	    	this.requestLayout();
-	    	
-	    }
+	@Override
+	public void setAdapter(Adapter adapter) {
+		if (!(adapter instanceof DraggableGridViewAdapter)) throw new IllegalArgumentException("DraggableGridView requires an adapter that is a subclass of DraggableGridViewAdapter");
+		this.mAdapter = (DraggableGridViewAdapter)adapter;
+		this.requestLayout();
+
+	}
 
 	@Override
 	public Adapter getAdapter() {
@@ -142,11 +139,11 @@ public class DraggableGridView extends AdapterView implements
 		super.removeViewAt(index);
 		newPositions.remove(index);
 	};
-	
+
 	protected void removeAndRecycleCell(View childCell) {
-    	this.removeViewInLayout(childCell);
-    	if (childCell instanceof DraggableGridViewCell) mAdapter.recycleCell((DraggableGridViewCell)childCell);
-    }
+		this.removeViewInLayout(childCell);
+		if (childCell instanceof DraggableGridViewCell) mAdapter.recycleCell((DraggableGridViewCell)childCell);
+	}
 
 	@Override
 	public boolean addViewInLayout(View child, int index, LayoutParams params) {
@@ -159,7 +156,7 @@ public class DraggableGridView extends AdapterView implements
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		// compute width of view, in dp
 		float w = (r - l) / (dpi / 160f); // 160 is standard dpi and represents
-											// conversion rate from google.
+		// conversion rate from google.
 
 		// determine number of columns, at least 2
 		colCount = 2;
@@ -185,9 +182,9 @@ public class DraggableGridView extends AdapterView implements
 		// "; View Heigh = + " + dgvHeight + "; bottomRow = " + bottomRow);
 
 		int topRowLoaded = topRow; // the top row loaded, including any padding
-									// of rows at the beginning.
+		// of rows at the beginning.
 		int bottomRowLoaded = bottomRow; // Will also include any padding later
-											// for perf.
+		// for perf.
 		int firstCellPosition = Math.max(0, (topRowLoaded - TOP_ROW_PADDING)
 				* colCount);
 		int finalCellPosition = Math.min(mAdapter.getCount() - 1,
@@ -197,32 +194,32 @@ public class DraggableGridView extends AdapterView implements
 
 		int totalAvailableCells = mAdapter.getCount();
 
-		 //Loop through all the children; relayout the ones that should stay; remove the ones that are no longer in our range. 
-        for (int i = 0; i < this.getChildCount(); i++) {
-        	View child = getChildAt(i);
-        	int childPositionInData = -1;
-        	try {
-        		childPositionInData = ((DraggableGridViewCell)child).getPositionInData();
-        	} catch (DraggableGridViewCell.CellDataNotSetException e) {
-        		Log.e("dgv", "Could not layout draggable grid view. Got a cell with no position data: " + e.getMessage());
-        		continue;
-        	}
-        	
-        	if (childPositionInData == dragged)
-        		continue;
-        	
-        	if (childPositionInData >= firstCellPosition && childPositionInData <= finalCellPosition) {
-        		Point xy = getCoorFromIndex(childPositionInData); //This probably needs to be renormalized based on what is being shown. 
-        		child.measure(MeasureSpec.makeMeasureSpec(child.getLayoutParams().width, MeasureSpec.UNSPECIFIED),
-	                    MeasureSpec.makeMeasureSpec(child.getLayoutParams().height, MeasureSpec.UNSPECIFIED));
+		//Loop through all the children; relayout the ones that should stay; remove the ones that are no longer in our range.
+		for (int i = 0; i < this.getChildCount(); i++) {
+			View child = getChildAt(i);
+			int childPositionInData = -1;
+			try {
+				childPositionInData = ((DraggableGridViewCell)child).getPositionInData();
+			} catch (DraggableGridViewCell.CellDataNotSetException e) {
+				Log.e("dgv", "Could not layout draggable grid view. Got a cell with no position data: " + e.getMessage());
+				continue;
+			}
 
-	            child.layout(xy.x, xy.y, xy.x + childSize, xy.y + childSize); //view group will layout the children based on the sizes determined for available columns
-	            child.invalidate();
-	            addedPositions.add(new Integer(childPositionInData));
-        	} else {
-        		this.removeAndRecycleCell(child);
-        	}
-        }
+			if (childPositionInData == dragged)
+				continue;
+
+			if (childPositionInData >= firstCellPosition && childPositionInData <= finalCellPosition) {
+				Point xy = getCoorFromIndex(childPositionInData); //This probably needs to be renormalized based on what is being shown.
+				child.measure(MeasureSpec.makeMeasureSpec(child.getLayoutParams().width, MeasureSpec.UNSPECIFIED),
+						MeasureSpec.makeMeasureSpec(child.getLayoutParams().height, MeasureSpec.UNSPECIFIED));
+
+				child.layout(xy.x, xy.y, xy.x + childSize, xy.y + childSize); //view group will layout the children based on the sizes determined for available columns
+				child.invalidate();
+				addedPositions.add(new Integer(childPositionInData));
+			} else {
+				this.removeAndRecycleCell(child);
+			}
+		}
 
 		for (int i = firstCellPosition; i <= finalCellPosition; i++) {
 			if (i == dragged)
@@ -241,7 +238,7 @@ public class DraggableGridView extends AdapterView implements
 			}
 		}
 	}
-	
+
 	protected void reorderChildren() {
 		if (onRearrangeListener != null)
 			onRearrangeListener.onRearrange(dragged, lastTarget);
@@ -293,7 +290,7 @@ public class DraggableGridView extends AdapterView implements
 	protected int getChildDrawingOrder(int childCount, int i) {
 		if (dragged == -1)
 			return i;
-		
+
 		if (i == childCount - 1)
 			return getIndexFromPositionInData(dragged);
 		else if (i >= getIndexFromPositionInData(dragged))
@@ -330,7 +327,7 @@ public class DraggableGridView extends AdapterView implements
 		int leftPos = getIndexFromCoor(x - (childSize / 4), y);
 		int rightPos = getIndexFromCoor(x + (childSize / 4), y);
 		if (leftPos == -1 && rightPos == -1) // touch is in the middle of
-												// nowhere
+			// nowhere
 			return -1;
 		if (leftPos == rightPos) // touch is in the middle of a visual
 			return -1;
@@ -377,6 +374,7 @@ public class DraggableGridView extends AdapterView implements
 	}
 
 	// EVENT HANDLERS
+	@Override
 	public void onClick(View view) {
 		if (enabled) {
 			if (secondaryOnClickListener != null)
@@ -388,6 +386,7 @@ public class DraggableGridView extends AdapterView implements
 		}
 	}
 
+	@Override
 	public boolean onLongClick(View view) {
 		if (!enabled)
 			return false;
@@ -403,6 +402,7 @@ public class DraggableGridView extends AdapterView implements
 		return false;
 	}
 
+	@Override
 	public boolean onTouch(View view, MotionEvent event) {
 		int action = event.getAction();
 		switch (action & MotionEvent.ACTION_MASK) {
@@ -500,7 +500,7 @@ public class DraggableGridView extends AdapterView implements
 				newPos--;
 			else if (target < dragged && pos >= target && pos < dragged)
 				newPos++;
-			
+
 			//Log.i("dgv", "Animating view with position: " + pos);
 
 			// animate

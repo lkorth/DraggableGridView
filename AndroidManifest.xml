@@ -14,7 +14,6 @@
         android:name=".DGVDbSampleApplication">
         <activity
             android:label="@string/app_name"
-            android:theme="@style/Theme.Sherlock.ForceOverflow" 
             android:name=".DraggableGridViewDbSampleActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
