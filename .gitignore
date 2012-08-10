@@ -9,11 +9,5 @@
 *.class
 
 # generated files
-DraggableGridView/bin/*
-DraggableGridView/gen/*
-
-# Local configuration file (sdk path, etc)
-*.DS_STORE
-
-DraggableGridView/bin/DraggableGridViewSample.apk
-DraggableGridView/bin/resources.ap_
+bin/*
+gen/*
