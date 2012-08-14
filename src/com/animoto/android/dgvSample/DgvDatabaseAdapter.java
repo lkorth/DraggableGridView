@@ -1,14 +1,15 @@
-package com.animoto.android.dgvdbsample;
+package com.animoto.android.dgvSample;
 
 
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.animoto.android.db.ORMHelper;
+import com.animoto.android.db.Photo;
 import com.animoto.android.dgv.DraggableGridViewAdapter;
 import com.animoto.android.dgv.DraggableGridViewCell;
-import com.animoto.android.dgvdbsample.model.ORMHelper;
-import com.animoto.android.dgvdbsample.model.Photo;
+import com.animoto.android.dgvdbsample.R;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package com.animoto.android.dgvdbsample;
+package com.animoto.android.dgvSample;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,10 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import com.animoto.android.db.ORMHelper;
+import com.animoto.android.db.Photo;
 import com.animoto.android.dgv.DraggableGridView;
 import com.animoto.android.dgv.OnRearrangeListener;
-import com.animoto.android.dgvdbsample.model.ORMHelper;
-import com.animoto.android.dgvdbsample.model.Photo;
+import com.animoto.android.dgvdbsample.R;
 
 
 public class DraggableGridViewDbSampleActivity extends Activity implements OnRearrangeListener {

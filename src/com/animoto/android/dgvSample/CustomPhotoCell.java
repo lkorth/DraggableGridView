@@ -1,4 +1,4 @@
-package com.animoto.android.dgvdbsample;
+package com.animoto.android.dgvSample;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,8 +6,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.animoto.android.db.Photo;
 import com.animoto.android.dgv.DraggableGridViewCell;
-import com.animoto.android.dgvdbsample.model.Photo;
+import com.animoto.android.dgvdbsample.R;
 
 public class CustomPhotoCell extends FrameLayout implements DraggableGridViewCell {
 	public static final String CUSTOM_PHOTO_CELL_IDENTIFIER = "CUSTOM_PHOTO_CELL";
@@ -46,7 +47,7 @@ public class CustomPhotoCell extends FrameLayout implements DraggableGridViewCel
 		if (p != null && cellTitle != null) {
 			cellTitle.setText("" + p.id);
 			//cellInfo.setText(p.fileName);
-			int imgId = this.getContext().getResources().getIdentifier(p.fileName, "drawable", "com.animoto.android.dgvdbsample");
+			int imgId = this.getContext().getResources().getIdentifier(p.fileName, "drawable", "com.animoto.android.dgvSample");
 			cellImage.setImageDrawable(this.getContext().getResources().getDrawable(imgId));
 		}
 	}

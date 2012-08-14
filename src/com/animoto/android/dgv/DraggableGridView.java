@@ -22,8 +22,8 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.animoto.android.db.ORMHelper;
 import com.animoto.android.dgv.DraggableGridViewCell.CellDataNotSetException;
-import com.animoto.android.dgvdbsample.model.ORMHelper;
 
 public class DraggableGridView extends AdapterView implements
 View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {

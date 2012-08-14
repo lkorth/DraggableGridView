@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.animoto.android.dgvdbsample.CustomPhotoCell 
+<com.animoto.android.dgvSample.CustomPhotoCell 
     xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -39,4 +39,4 @@
 			    android:textSize="15px" ></TextView-->
 		
 		 </LinearLayout>
-</com.animoto.android.dgvdbsample.CustomPhotoCell>
+</com.animoto.android.dgvSample.CustomPhotoCell>

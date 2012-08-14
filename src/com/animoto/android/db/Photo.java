@@ -1,4 +1,4 @@
-package com.animoto.android.dgvdbsample.model;
+package com.animoto.android.db;
 
 import java.util.Date;
 

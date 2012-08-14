@@ -1,11 +1,11 @@
-package com.animoto.android.dgvdbsample.model;
+package com.animoto.android.db;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import com.animoto.android.dgvdbsample.model.Photo;
+import com.animoto.android.db.Photo;
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.stmt.PreparedQuery;
