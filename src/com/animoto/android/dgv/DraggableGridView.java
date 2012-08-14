@@ -22,7 +22,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
-import com.animoto.android.db.ORMHelper;
+import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridViewCell.CellDataNotSetException;
 
 public class DraggableGridView extends AdapterView implements
@@ -48,10 +48,12 @@ View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 	private OnItemClickListener onItemClickListener;
 
 	protected DraggableGridViewAdapter mAdapter;
+	private DatabaseHelper dbh;
 
 	// CONSTRUCTOR AND HELPERS
 	public DraggableGridView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		dbh = new DatabaseHelper(context);
 		setListeners();
 		handler.removeCallbacks(updateTask);
 		handler.postAtTime(updateTask, SystemClock.uptimeMillis() + 500);
@@ -250,12 +252,12 @@ View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 				int pos = getPositionInData(i);
 				if (pos >= lastTarget && pos < dragged)
 				{
-					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(ORMHelper.photoDao.getPhotoWithPosition(pos + 1));
+					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(dbh.getIconPosition(pos + 1));
 					Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos + 1));
 				}
 				else if (pos == dragged)
 				{
-					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(ORMHelper.photoDao.getPhotoWithPosition(lastTarget));
+					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(dbh.getIconPosition(lastTarget));
 					Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
 				}
 			}
@@ -266,12 +268,12 @@ View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 				int pos = getPositionInData(i);
 				if (pos > dragged && pos <= lastTarget)
 				{
-					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(ORMHelper.photoDao.getPhotoWithPosition(pos - 1));
+					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(dbh.getIconPosition(pos - 1));
 					Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos - 1));
 				}
 				else if (pos == dragged)
 				{
-					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(ORMHelper.photoDao.getPhotoWithPosition(lastTarget));
+					((DraggableGridViewCell) getChildAt(i)).changeDataForCell(dbh.getIconPosition(lastTarget));
 					Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
 				}
 			}
