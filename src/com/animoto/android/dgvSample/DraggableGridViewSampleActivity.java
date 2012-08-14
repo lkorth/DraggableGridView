@@ -9,7 +9,7 @@ import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridView;
 import com.animoto.android.dgv.OnRearrangeListener;
 
-public class DraggableGridViewDbSampleActivity extends Activity implements OnRearrangeListener {
+public class DraggableGridViewSampleActivity extends Activity implements OnRearrangeListener {
 
 	private DraggableGridView dgv;
 	private DatabaseHelper dbh;
