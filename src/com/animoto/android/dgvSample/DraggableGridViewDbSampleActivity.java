@@ -1,31 +1,51 @@
 package com.animoto.android.dgvSample;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridView;
 import com.animoto.android.dgv.OnRearrangeListener;
 
 public class DraggableGridViewDbSampleActivity extends Activity implements OnRearrangeListener {
 
-	DraggableGridView dgv;
+	private DraggableGridView dgv;
+	private DatabaseHelper dbh;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		dgv = ((DraggableGridView)findViewById(R.id.vgv));
+		dbh = new DatabaseHelper(this);
 
-		dgv.setAdapter(new DgvDatabaseAdapter(getBaseContext()));
+		dgv = ((DraggableGridView)findViewById(R.id.vgv));
+		dgv.setAdapter(new DgvDatabaseAdapter(this));
 		dgv.setOnRearrangeListener(this);
 	}
 
 	@Override
 	public void onRearrange(int oldIndex, int newIndex) {
-		ORMHelper.photoDao.rearrangePhotos(oldIndex, newIndex);
-		Log.i("dgv", "Item at position " + oldIndex + " moved to " + newIndex + ".");
+		SQLiteDatabase db = dbh.getWritableDatabase();
+
+		int oldIcon = dbh.getIconPosition(oldIndex);
+
+		String query;
+		if (newIndex < oldIndex) {
+			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
+					" + 1 WHERE " + DatabaseHelper.position + " >= " + newIndex + " AND " + DatabaseHelper.position + " < " + oldIndex;
+		} else {
+			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
+					" - 1 WHERE " + DatabaseHelper.position + " <= " + newIndex + " AND " + DatabaseHelper.position + " > " + oldIndex;
+		}
+
+		db.rawQuery(query, null);
+
+		ContentValues cv = new ContentValues();
+		cv.put(DatabaseHelper.position, newIndex);
+		db.update(DatabaseHelper.icons, cv, DatabaseHelper.iconNumber + "= " + oldIcon, null);
 	}
 
 
