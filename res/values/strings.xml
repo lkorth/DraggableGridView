@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, DraggableGridViewDbSampleActivity!</string>
     <string name="app_name">DraggableGridViewDbSample</string>
-	<string name="item1">Item 1</string>
-	<string name="item2">Item 2</string>
-	<string name="photo_cell_default_text">Photo Cell</string>
+	<string name="a">1</string>
+	<string name="b">2</string>
+	<string name="c">3</string>
+	<string name="d">4</string>
+	<string name="e">5</string>
+	<string name="f">6</string>
+	<string name="g">7</string>
+	<string name="h">8</string>
+	<string name="i">9</string>
+	<string name="j">10</string>
+	<string name="k">11</string>
+	<string name="l">12</string>
+	<string name="m">13</string>
+	<string name="n">14</string>
+	<string name="o">15</string>
+	<string name="p">16</string>
+	<string name="q">17</string>
 </resources>
