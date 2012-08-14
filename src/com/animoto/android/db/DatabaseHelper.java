@@ -104,6 +104,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cv.put(position, 14);
 		cv.put(iconNumber, 14);
 		db.insert(icons, null, cv);
+
+		cv = new ContentValues();
+		cv.put(position, 15);
+		cv.put(iconNumber, 15);
+		db.insert(icons, null, cv);
+
+		cv = new ContentValues();
+		cv.put(position, 16);
+		cv.put(iconNumber, 16);
+		db.insert(icons, null, cv);
 	}
 
 	@Override
