@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -123,8 +122,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public int getIconPosition(int pos){
-		Log.d("ACHESS", "" + pos);
-
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(DatabaseHelper.icons, new String[] { DatabaseHelper.iconNumber }, DatabaseHelper.position + " =?",
 				new String[]{ Integer.toString(pos) }, null, null, null);
