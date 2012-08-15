@@ -41,7 +41,7 @@ public class DraggableGridViewSampleActivity extends Activity implements OnRearr
 					" - 1 WHERE " + DatabaseHelper.position + " <= " + newIndex + " AND " + DatabaseHelper.position + " > " + oldIndex;
 		}
 
-		db.rawQuery(query, null);
+		db.execSQL(query);
 
 		ContentValues cv = new ContentValues();
 		cv.put(DatabaseHelper.position, newIndex);
