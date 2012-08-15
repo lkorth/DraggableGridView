@@ -20,13 +20,14 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
 import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridViewCell.CellDataNotSetException;
 
 public class DraggableGridView extends AdapterView implements
-View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
+View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 	// layout vars
 	private static final int TOP_ROW_PADDING = 4;
 	private static final int BOTTOM_ROW_PADDING = 4;
@@ -44,7 +45,6 @@ View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 	protected ArrayList<Integer> newPositions = new ArrayList<Integer>();
 	// listeners
 	protected OnRearrangeListener onRearrangeListener;
-	protected OnClickListener secondaryOnClickListener;
 	private OnItemClickListener onItemClickListener;
 
 	protected DraggableGridViewAdapter mAdapter;
@@ -377,14 +377,9 @@ View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 
 	// EVENT HANDLERS
 	@Override
-	public void onClick(View view) {
-		if (enabled) {
-			if (secondaryOnClickListener != null)
-				secondaryOnClickListener.onClick(view);
-			if (onItemClickListener != null && getLastIndex() != -1)
-				onItemClickListener.onItemClick(null,
-						getChildAt(getLastIndex()), getLastIndex(),
-						getLastIndex() / colCount);
+	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+		if (onItemClickListener != null){
+			onItemClickListener.onItemClick(adapter, view, position, id);
 		}
 	}
 
@@ -576,5 +571,10 @@ View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
 	// OTHER METHODS
 	public void setOnRearrangeListener(OnRearrangeListener l) {
 		this.onRearrangeListener = l;
+	}
+
+	@Override
+	public void setOnItemClickListener(OnItemClickListener l){
+		this.onItemClickListener = l;
 	}
 }

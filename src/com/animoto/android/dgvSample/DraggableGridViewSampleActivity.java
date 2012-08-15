@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridView;
 import com.animoto.android.dgv.OnRearrangeListener;
 
-public class DraggableGridViewSampleActivity extends Activity implements OnRearrangeListener {
+public class DraggableGridViewSampleActivity extends Activity implements OnRearrangeListener, OnItemClickListener {
 
 	private DraggableGridView dgv;
 	private DatabaseHelper dbh;
@@ -24,6 +28,7 @@ public class DraggableGridViewSampleActivity extends Activity implements OnRearr
 		dgv = ((DraggableGridView)findViewById(R.id.vgv));
 		dgv.setAdapter(new DgvDatabaseAdapter(this));
 		dgv.setOnRearrangeListener(this);
+		dgv.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -46,6 +51,11 @@ public class DraggableGridViewSampleActivity extends Activity implements OnRearr
 		ContentValues cv = new ContentValues();
 		cv.put(DatabaseHelper.position, newIndex);
 		db.update(DatabaseHelper.icons, cv, DatabaseHelper.iconNumber + "= " + oldIcon, null);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+		Toast.makeText(this, "Click position " + position, Toast.LENGTH_SHORT);		
 	}
 
 
