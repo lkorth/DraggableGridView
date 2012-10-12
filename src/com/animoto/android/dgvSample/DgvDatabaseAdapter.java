@@ -1,5 +1,6 @@
 package com.animoto.android.dgvSample;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,8 +10,9 @@ import android.view.ViewGroup;
 
 import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridViewAdapter;
+import com.animoto.android.dgv.OnRearrangeListener;
 
-public class DgvDatabaseAdapter extends DraggableGridViewAdapter {
+public class DgvDatabaseAdapter extends DraggableGridViewAdapter implements OnRearrangeListener {
 
 	public static final int[] mImages = {
 		R.drawable.sample_img_1, R.drawable.sample_img_2,
@@ -73,9 +75,8 @@ public class DgvDatabaseAdapter extends DraggableGridViewAdapter {
 
 		Icon icon = (Icon) this.getConvertibleCell(Icon.name);
 
-		if(icon == null){
+		if(icon == null)
 			icon = (Icon) layoutInflater.inflate(R.layout.photo_cell, null);
-		}
 
 		icon.setIcon(position);
 
@@ -83,6 +84,30 @@ public class DgvDatabaseAdapter extends DraggableGridViewAdapter {
 		dbh.close();
 
 		return icon;
+	}
+
+	@Override
+	public void onRearrange(int oldIndex, int newIndex) {
+		DatabaseHelper dbh = new DatabaseHelper(mContext);
+
+		SQLiteDatabase db = dbh.getWritableDatabase();
+
+		int oldIcon = dbh.getIconPosition(oldIndex);
+
+		String query;
+		if (newIndex < oldIndex) {
+			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
+					" + 1 WHERE " + DatabaseHelper.position + " >= " + newIndex + " AND " + DatabaseHelper.position + " < " + oldIndex;
+		} else {
+			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
+					" - 1 WHERE " + DatabaseHelper.position + " <= " + newIndex + " AND " + DatabaseHelper.position + " > " + oldIndex;
+		}
+
+		db.execSQL(query);
+
+		ContentValues cv = new ContentValues();
+		cv.put(DatabaseHelper.position, newIndex);
+		db.update(DatabaseHelper.icons, cv, DatabaseHelper.iconNumber + "= " + oldIcon, null);
 	}
 
 }

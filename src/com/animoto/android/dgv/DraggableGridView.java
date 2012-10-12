@@ -109,9 +109,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 	@Override
 	public void setAdapter(Adapter adapter) {
 		if (!(adapter instanceof DraggableGridViewAdapter)) throw new IllegalArgumentException("DraggableGridView requires an adapter that is a subclass of DraggableGridViewAdapter");
-		this.mAdapter = (DraggableGridViewAdapter)adapter;
+		this.mAdapter = (DraggableGridViewAdapter) adapter;
+		this.onRearrangeListener = (OnRearrangeListener) adapter;
 		this.requestLayout();
-
 	}
 
 	@Override
@@ -566,11 +566,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
 	public int getLastIndex() {
 		return getIndexFromCoor(lastX, lastY);
-	}
-
-	// OTHER METHODS
-	public void setOnRearrangeListener(OnRearrangeListener l) {
-		this.onRearrangeListener = l;
 	}
 
 	@Override

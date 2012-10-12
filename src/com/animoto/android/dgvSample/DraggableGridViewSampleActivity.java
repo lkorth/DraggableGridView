@@ -1,62 +1,30 @@
 package com.animoto.android.dgvSample;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridView;
-import com.animoto.android.dgv.OnRearrangeListener;
 
-public class DraggableGridViewSampleActivity extends Activity implements OnRearrangeListener, OnItemClickListener {
-
-	private DraggableGridView dgv;
-	private DatabaseHelper dbh;
+public class DraggableGridViewSampleActivity extends Activity implements OnItemClickListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		dbh = new DatabaseHelper(this);
-
-		dgv = ((DraggableGridView)findViewById(R.id.vgv));
-		dgv.setAdapter(new DgvDatabaseAdapter(this));
-		dgv.setOnRearrangeListener(this);
+		DraggableGridView dgv = ((DraggableGridView)findViewById(R.id.vgv));
+		DgvDatabaseAdapter adapter = new DgvDatabaseAdapter(this);
+		dgv.setAdapter(adapter);
 		dgv.setOnItemClickListener(this);
 	}
 
 	@Override
-	public void onRearrange(int oldIndex, int newIndex) {
-		SQLiteDatabase db = dbh.getWritableDatabase();
-
-		int oldIcon = dbh.getIconPosition(oldIndex);
-
-		String query;
-		if (newIndex < oldIndex) {
-			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
-					" + 1 WHERE " + DatabaseHelper.position + " >= " + newIndex + " AND " + DatabaseHelper.position + " < " + oldIndex;
-		} else {
-			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
-					" - 1 WHERE " + DatabaseHelper.position + " <= " + newIndex + " AND " + DatabaseHelper.position + " > " + oldIndex;
-		}
-
-		db.execSQL(query);
-
-		ContentValues cv = new ContentValues();
-		cv.put(DatabaseHelper.position, newIndex);
-		db.update(DatabaseHelper.icons, cv, DatabaseHelper.iconNumber + "= " + oldIcon, null);
-	}
-
-	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-		Toast.makeText(this, "Click position " + position, Toast.LENGTH_SHORT);		
+		Toast.makeText(this, "Click position " + position, Toast.LENGTH_SHORT);
 	}
-
 
 }
