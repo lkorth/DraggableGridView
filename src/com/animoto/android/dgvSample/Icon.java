@@ -35,8 +35,8 @@ public class Icon extends LinearLayout implements DraggableGridViewCell {
 
 	public void setIcon(int number){
 		currentPosition = number;
-		mCaption.setText(DgvDatabaseAdapter.mCaptions[number]);
-		mImage.setImageResource(DgvDatabaseAdapter.mImages[number]);
+		mCaption.setText(DraggableAdapter.mCaptions[number]);
+		mImage.setImageResource(DraggableAdapter.mImages[number]);
 	}
 
 	@Override

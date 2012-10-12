@@ -12,7 +12,7 @@ import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridViewAdapter;
 import com.animoto.android.dgv.OnRearrangeListener;
 
-public class DgvDatabaseAdapter extends DraggableGridViewAdapter implements OnRearrangeListener {
+public class DraggableAdapter extends DraggableGridViewAdapter implements OnRearrangeListener {
 
 	public static final int[] mImages = {
 		R.drawable.sample_img_1, R.drawable.sample_img_2,
@@ -41,7 +41,7 @@ public class DgvDatabaseAdapter extends DraggableGridViewAdapter implements OnRe
 	private Context mContext;
 	private LayoutInflater layoutInflater;
 
-	public DgvDatabaseAdapter(Context context) {
+	public DraggableAdapter(Context context) {
 		super(context);
 		mContext = context;
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
