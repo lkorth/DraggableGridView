@@ -1,14 +1,12 @@
 package com.animoto.android.dgvSample;
 
-import android.content.ContentValues;
+import java.util.LinkedList;
+
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.animoto.android.db.DatabaseHelper;
 import com.animoto.android.dgv.DraggableGridViewAdapter;
 import com.animoto.android.dgv.OnRearrangeListener;
 
@@ -38,13 +36,17 @@ public class DraggableAdapter extends DraggableGridViewAdapter implements OnRear
 		R.string.q
 	};
 
-	private Context mContext;
 	private LayoutInflater layoutInflater;
+	private LinkedList<Integer> icons;
 
 	public DraggableAdapter(Context context) {
 		super(context);
-		mContext = context;
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		icons = new LinkedList<Integer>();
+		for(int i = 0; i < 17; i++){
+			icons.add(i);
+		}
 	}
 
 	@Override
@@ -58,18 +60,18 @@ public class DraggableAdapter extends DraggableGridViewAdapter implements OnRear
 	}
 
 	@Override
+	public int getIcon(int position){
+		return icons.get(position);
+	}
+
+	@Override
 	public long getItemId(int position) {
 		return 0;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		DatabaseHelper dbh = new DatabaseHelper(mContext);
-		SQLiteDatabase db = dbh.getReadableDatabase();
-		Cursor cursor = db.query(DatabaseHelper.icons, new String[] { DatabaseHelper.iconNumber }, DatabaseHelper.position + " =?",
-				new String[]{ Integer.toString(position) }, null, null, null);
-		cursor.moveToNext();
-		int item = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.iconNumber));
+		int item = icons.get(position);
 
 		System.out.println("position: " + position + " icon: " + item);
 
@@ -80,34 +82,15 @@ public class DraggableAdapter extends DraggableGridViewAdapter implements OnRear
 
 		icon.setIcon(position);
 
-		db.close();
-		dbh.close();
-
 		return icon;
 	}
 
 	@Override
 	public void onRearrange(int oldIndex, int newIndex) {
-		DatabaseHelper dbh = new DatabaseHelper(mContext);
-
-		SQLiteDatabase db = dbh.getWritableDatabase();
-
-		int oldIcon = dbh.getIconPosition(oldIndex);
-
-		String query;
-		if (newIndex < oldIndex) {
-			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
-					" + 1 WHERE " + DatabaseHelper.position + " >= " + newIndex + " AND " + DatabaseHelper.position + " < " + oldIndex;
-		} else {
-			query = "UPDATE " + DatabaseHelper.icons +  " SET " + DatabaseHelper.position + " = " + DatabaseHelper.position +
-					" - 1 WHERE " + DatabaseHelper.position + " <= " + newIndex + " AND " + DatabaseHelper.position + " > " + oldIndex;
-		}
-
-		db.execSQL(query);
-
-		ContentValues cv = new ContentValues();
-		cv.put(DatabaseHelper.position, newIndex);
-		db.update(DatabaseHelper.icons, cv, DatabaseHelper.iconNumber + "= " + oldIcon, null);
+		int movingIcon = icons.get(oldIndex);
+		icons.remove(oldIndex);
+		icons.add(newIndex, movingIcon);
+		notifyDataSetChanged();
 	}
 
 }

@@ -41,6 +41,7 @@ public abstract class DraggableGridViewAdapter extends BaseAdapter {
 		return availableCells.remove(availableCells.size()-1);
 	}
 
+	abstract public int getIcon(int position);
 
 	protected Context getContext() {
 		return mContext;
