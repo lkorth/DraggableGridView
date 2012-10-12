@@ -37,10 +37,12 @@ public class DgvDatabaseAdapter extends DraggableGridViewAdapter {
 	};
 
 	private Context mContext;
+	private LayoutInflater layoutInflater;
 
 	public DgvDatabaseAdapter(Context context) {
 		super(context);
 		mContext = context;
+		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
@@ -72,7 +74,6 @@ public class DgvDatabaseAdapter extends DraggableGridViewAdapter {
 		Icon icon = (Icon) this.getConvertibleCell(Icon.name);
 
 		if(icon == null){
-			LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			icon = (Icon) layoutInflater.inflate(R.layout.photo_cell, null);
 		}
 
