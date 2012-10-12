@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DraggableGridViewDbSample</string>
+    <string name="app_name">Draggable GridView Sample</string>
 	<string name="a">1</string>
 	<string name="b">2</string>
 	<string name="c">3</string>
