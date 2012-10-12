@@ -11,3 +11,7 @@
 # generated files
 bin/*
 gen/*
+
+# Eclipse files
+.classpath
+.project
