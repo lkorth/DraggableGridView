@@ -100,10 +100,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         newPositions.remove(index);
     };
 
-    protected void removeAndRecycleCell(View childCell) {
-        this.removeViewInLayout(childCell);
-    }
-
     @Override
     public boolean addViewInLayout(View child, int index, LayoutParams params) {
         newPositions.add(-1);
@@ -172,7 +168,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 child.invalidate();
                 addedPositions.add(new Integer(childPositionInData));
             } else {
-                this.removeAndRecycleCell(child);
+                this.removeViewInLayout(child);
             }
         }
 
