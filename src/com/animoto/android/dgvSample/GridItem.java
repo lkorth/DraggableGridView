@@ -23,11 +23,6 @@ public class GridItem extends LinearLayout {
         mImage = (ImageView) this.findViewById(R.id.grid_item_image);
     }
 
-    public boolean changeDataForCell(int number) {
-        setIcon(number);
-        return true;
-    }
-
     public void setIcon(int number){
         currentPosition = number;
         mCaption.setText(DraggableGridViewAdapter.mCaptions[number]);

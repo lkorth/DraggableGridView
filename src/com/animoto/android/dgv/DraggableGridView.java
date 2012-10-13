@@ -201,12 +201,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 int pos = getPositionInData(i);
                 if (pos >= lastTarget && pos < dragged)
                 {
-                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(pos +1));
+                    ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(pos +1));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos + 1));
                 }
                 else if (pos == dragged)
                 {
-                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(lastTarget));
+                    ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(lastTarget));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
@@ -217,12 +217,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 int pos = getPositionInData(i);
                 if (pos > dragged && pos <= lastTarget)
                 {
-                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(pos - 1));
+                    ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(pos - 1));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos - 1));
                 }
                 else if (pos == dragged)
                 {
-                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(lastTarget));
+                    ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(lastTarget));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
