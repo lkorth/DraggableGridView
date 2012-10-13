@@ -137,7 +137,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     protected void removeAndRecycleCell(View childCell) {
         this.removeViewInLayout(childCell);
-        //if (childCell instanceof DraggableGridViewCell) mAdapter.recycleCell((DraggableGridViewCell)childCell);
     }
 
     @Override
