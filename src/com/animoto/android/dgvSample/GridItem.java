@@ -6,9 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.animoto.android.dgv.DraggableGridViewCell;
-
-public class Icon extends LinearLayout implements DraggableGridViewCell {
+public class GridItem extends LinearLayout {
 
     public static final String name = "ICON";
 
@@ -16,7 +14,7 @@ public class Icon extends LinearLayout implements DraggableGridViewCell {
     private ImageView mImage;
     private int currentPosition = -1;
 
-    public Icon(Context context, AttributeSet attr) {
+    public GridItem(Context context, AttributeSet attr) {
         super(context, attr);
     }
 
@@ -27,7 +25,6 @@ public class Icon extends LinearLayout implements DraggableGridViewCell {
         mImage = (ImageView) this.findViewById(R.id.grid_item_image);
     }
 
-    @Override
     public boolean changeDataForCell(int number) {
         setIcon(number);
         return true;
@@ -39,11 +36,8 @@ public class Icon extends LinearLayout implements DraggableGridViewCell {
         mImage.setImageResource(DraggableGridViewAdapter.mImages[number]);
     }
 
-    @Override
-    public int getPositionInData() throws CellDataNotSetException {
-        if (currentPosition == -1) {
-            throw new CellDataNotSetException("Custom photo cell doesn't have an underlying model object set");
-        } else return currentPosition;
+    public int getPositionInData() {
+        return currentPosition;
     }
 
 }

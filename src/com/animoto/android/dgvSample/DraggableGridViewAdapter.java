@@ -76,7 +76,7 @@ public class DraggableGridViewAdapter extends BaseAdapter implements OnRearrange
 
         System.out.println("position: " + position + " icon: " + item);
 
-        Icon icon = (Icon) layoutInflater.inflate(R.layout.photo_cell, null);
+        GridItem icon = (GridItem) layoutInflater.inflate(R.layout.grid_item, null);
 
         icon.setIcon(position);
 

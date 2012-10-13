@@ -20,8 +20,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
-import com.animoto.android.dgv.DraggableGridViewCell.CellDataNotSetException;
 import com.animoto.android.dgvSample.DraggableGridViewAdapter;
+import com.animoto.android.dgvSample.GridItem;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -198,12 +198,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         for (int i = 0; i < this.getChildCount(); i++) {
             View child = getChildAt(i);
             int childPositionInData = -1;
-            try {
-                childPositionInData = ((DraggableGridViewCell)child).getPositionInData();
-            } catch (DraggableGridViewCell.CellDataNotSetException e) {
-                Log.e("dgv", "Could not layout draggable grid view. Got a cell with no position data: " + e.getMessage());
-                continue;
-            }
+
+            childPositionInData = ((GridItem)child).getPositionInData();
+
 
             if (childPositionInData == dragged)
                 continue;
@@ -250,12 +247,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 int pos = getPositionInData(i);
                 if (pos >= lastTarget && pos < dragged)
                 {
-                    ((DraggableGridViewCell) getChildAt(i)).changeDataForCell(mAdapter.getIcon(pos +1));
+                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(pos +1));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos + 1));
                 }
                 else if (pos == dragged)
                 {
-                    ((DraggableGridViewCell) getChildAt(i)).changeDataForCell(mAdapter.getIcon(lastTarget));
+                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(lastTarget));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
@@ -266,12 +263,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 int pos = getPositionInData(i);
                 if (pos > dragged && pos <= lastTarget)
                 {
-                    ((DraggableGridViewCell) getChildAt(i)).changeDataForCell(mAdapter.getIcon(pos - 1));
+                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(pos - 1));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos - 1));
                 }
                 else if (pos == dragged)
                 {
-                    ((DraggableGridViewCell) getChildAt(i)).changeDataForCell(mAdapter.getIcon(lastTarget));
+                    ((GridItem) getChildAt(i)).changeDataForCell(mAdapter.getIcon(lastTarget));
                     Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
@@ -346,13 +343,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     protected int getPositionInData(int index) {
-        try {
-            return ((DraggableGridViewCell) getChildAt(index))
-                    .getPositionInData();
-        } catch (CellDataNotSetException e) {
-            e.printStackTrace();
-        }
-        return -1;
+        return ((GridItem) getChildAt(index)).getPositionInData();
     }
 
     public int getIndexOf(View child) {
@@ -363,13 +354,10 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     public int getIndexFromPositionInData(int positionInData) {
-        for (int i = 0; i < getChildCount(); i++)
-            try {
-                if (((DraggableGridViewCell) getChildAt(i)).getPositionInData() == positionInData)
-                    return i;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        for (int i = 0; i < getChildCount(); i++){
+            if (((GridItem) getChildAt(i)).getPositionInData() == positionInData)
+                return i;
+        }
         return -1;
     }
 

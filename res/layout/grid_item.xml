@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<com.animoto.android.dgvSample.Icon xmlns:android="http://schemas.android.com/apk/res/android"
+	<com.animoto.android.dgvSample.GridItem xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:gravity="center"
@@ -16,4 +16,4 @@
 		android:layout_height="wrap_content"
 		android:gravity="center_horizontal">
 	</TextView>
-</com.animoto.android.dgvSample.Icon>
+</com.animoto.android.dgvSample.GridItem>
