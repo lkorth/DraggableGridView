@@ -318,6 +318,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // EVENT HANDLERS
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+        Log.i("dgv", "clicked: " + position);
         if (onItemClickListener != null){
             onItemClickListener.onItemClick(adapter, view, position, id);
         }
