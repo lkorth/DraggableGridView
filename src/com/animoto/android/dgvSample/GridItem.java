@@ -19,8 +19,8 @@ public class GridItem extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mCaption = (TextView) this.findViewById(R.id.grid_item_text);
-        mImage = (ImageView) this.findViewById(R.id.grid_item_image);
+        mCaption = (TextView) findViewById(R.id.grid_item_text);
+        mImage = (ImageView) findViewById(R.id.grid_item_image);
     }
 
     public void setIcon(int number){
