@@ -101,10 +101,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     @Override
     public void setAdapter(DraggableGridViewAdapter adapter) {
-        if (!(adapter instanceof DraggableGridViewAdapter)) throw new IllegalArgumentException("DraggableGridView requires an adapter that is a subclass of DraggableGridViewAdapter");
-        this.mAdapter = (DraggableGridViewAdapter) adapter;
-        this.onRearrangeListener = (OnRearrangeListener) adapter;
-        this.requestLayout();
+        mAdapter = adapter;
+        onRearrangeListener = adapter;
+        requestLayout();
     }
 
     @Override
