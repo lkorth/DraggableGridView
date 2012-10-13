@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,7 +32,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     public static String LOG_TAG = "dgv";
     public static float childRatio = .9f;
-    protected int colCount, childSize, padding, dpi, scroll = 0;
+    protected int colCount, childSize, padding, dpi = 0;
     protected float lastDelta = 0;
     protected Handler handler = new Handler();
     // dragging vars
@@ -53,8 +52,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         super(context, attrs);
         setOnTouchListener(this);
         setOnLongClickListener(this);
-        handler.removeCallbacks(updateTask);
-        handler.postAtTime(updateTask, SystemClock.uptimeMillis() + 500);
         setChildrenDrawingOrderEnabled(true);
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -63,37 +60,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         dpi = metrics.densityDpi;
         Log.i(LOG_TAG, "finished creating DraggableGridView widget");
     }
-
-    protected Runnable updateTask = new Runnable() {
-        @Override
-        public void run() {
-            if (dragged != -1) {
-                if (lastY < padding * 3 && scroll > 0)
-                {
-                    scroll -= 20;
-                    onLayout(true, getLeft(), getTop(), getRight(), getBottom());
-                }
-                else if (lastY > getBottom() - getTop() - (padding * 3) && scroll < getMaxScroll())
-                {
-                    scroll += 20;
-                    onLayout(true, getLeft(), getTop(), getRight(), getBottom());
-                }
-            } else if (lastDelta != 0 && !touching) {
-                scroll += lastDelta;
-                lastDelta *= .9;
-                if (Math.abs(lastDelta) < .25)
-                    lastDelta = 0;
-            }
-            clampScroll();
-
-            if (lastDelta != 0)
-            {
-                invalidate();
-                onLayout(true, getLeft(), getTop(), getRight(), getBottom());
-            }
-            handler.postDelayed(this, 25);
-        }
-    };
 
     /*******************************************************************************************************
      * Adapter view overrides
@@ -167,10 +133,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         padding = ((r - l) - (childSize * colCount)) / (colCount + 1);
 
         int rowHeight = childSize + 2 * padding;
-        int topRow = (int) Math.floor(((double) scroll) / rowHeight);
+        int topRow = 0;
         int dgvHeight = this.getHeight();
-        int bottomRow = (int) Math.ceil(((double) (scroll + dgvHeight))
-                / rowHeight);
+        int bottomRow = 4;
         // Log.i("dgv", "Row Height = " + rowHeight + "; Top Row = " + topRow +
         // "; View Heigh = + " + dgvHeight + "; bottomRow = " + bottomRow);
 
@@ -273,7 +238,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         int col = index % colCount;
         int row = index / colCount;
         return new Point(padding + (childSize + padding) * col, padding
-                + (childSize + padding) * row - scroll);
+                + (childSize + padding) * row);
     }
 
     @Override
@@ -289,7 +254,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     public int getIndexFromCoor(int x, int y) {
-        int col = getColOrRowFromCoor(x), row = getColOrRowFromCoor(y + scroll);
+        int col = getColOrRowFromCoor(x), row = getColOrRowFromCoor(y);
         if (col == -1 || row == -1) // touch is between columns or rows
             return -1;
         int index = row * colCount + col;
@@ -309,7 +274,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     protected int getTargetFromCoor(int x, int y) {
-        if (getColOrRowFromCoor(y + scroll) == -1) // touch is between rows
+        if (getColOrRowFromCoor(y) == -1) // touch is between rows
             return -1;
         // if (getIndexFromCoor(x, y) != -1) //touch on top of another visual
         // return -1;
@@ -405,8 +370,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                         }
                     }
                 } else {
-                    scroll += delta;
-                    clampScroll();
                     if (Math.abs(delta) > 2)
                         enabled = false;
                     onLayout(true, getLeft(), getTop(), getRight(), getBottom());
@@ -500,47 +463,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
             newPositions.set(pos, newPos);
         }
-    }
-
-    public void scrollToTop() {
-        scroll = 0;
-    }
-
-    public void scrollToBottom() {
-        scroll = Integer.MAX_VALUE;
-        clampScroll();
-    }
-
-    protected void clampScroll() {
-        int stretch = 3, overreach = getHeight() / 2;
-        int max = getMaxScroll();
-        max = Math.max(max, 0);
-
-        if (scroll < -overreach) {
-            scroll = -overreach;
-            lastDelta = 0;
-        } else if (scroll > max + overreach) {
-            scroll = max + overreach;
-            lastDelta = 0;
-        } else if (scroll < 0) {
-            if (scroll >= -stretch)
-                scroll += lastDelta = -scroll;
-            else if (!touching)
-                scroll += lastDelta = -scroll / stretch;
-        } else if (scroll > max) {
-            if (scroll <= max + stretch)
-                scroll = max;
-            else if (!touching)
-                scroll += lastDelta = (max - scroll) / stretch;
-        }
-
-        //Log.i("dgv", "Scroll: " + scroll + ", Max Scroll: " + max + ", Last Delta: " + lastDelta);
-    }
-
-    protected int getMaxScroll() {
-        int rowCount = (int) Math.ceil((double) mAdapter.getCount() / colCount), max = rowCount
-                * childSize + (rowCount + 1) * padding - getHeight();
-        return max;
     }
 
     public int getLastIndex() {
