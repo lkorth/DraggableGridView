@@ -51,7 +51,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // CONSTRUCTOR AND HELPERS
     public DraggableGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setListeners();
+        setOnTouchListener(this);
+        setOnLongClickListener(this);
         handler.removeCallbacks(updateTask);
         handler.postAtTime(updateTask, SystemClock.uptimeMillis() + 500);
         setChildrenDrawingOrderEnabled(true);
@@ -61,11 +62,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         .getMetrics(metrics);
         dpi = metrics.densityDpi;
         Log.i(LOG_TAG, "finished creating DraggableGridView widget");
-    }
-
-    protected void setListeners() {
-        setOnTouchListener(this);
-        setOnLongClickListener(this);
     }
 
     protected Runnable updateTask = new Runnable() {
