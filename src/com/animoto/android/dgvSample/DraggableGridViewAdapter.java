@@ -1,6 +1,7 @@
 package com.animoto.android.dgvSample;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class DraggableGridViewAdapter extends BaseAdapter implements OnRearrange
     public View getView(int position, View convertView, ViewGroup parent) {
         int item = icons.get(position);
 
-        System.out.println("position: " + position + " icon: " + item);
+        Log.i("dgv", "position: " + position + " icon: " + item);
 
         GridItem icon = (GridItem) layoutInflater.inflate(R.layout.grid_item, null);
 
