@@ -46,14 +46,14 @@ public class DraggableGridViewAdapter extends BaseAdapter implements OnRearrange
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         icons = new LinkedList<Integer>();
-        for(int i = 0; i < 17; i++){
+        for(int i = 0; i < 12; i++){
             icons.add(i);
         }
     }
 
     @Override
     public int getCount() {
-        return mImages.length;
+        return icons.size();
     }
 
     @Override
