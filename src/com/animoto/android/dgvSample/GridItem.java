@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class GridItem extends LinearLayout {
 
-    public static final String name = "ICON";
+    public static final String name = "GRIDITEM";
 
     private TextView mCaption;
     private ImageView mImage;
