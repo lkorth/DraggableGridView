@@ -3,7 +3,6 @@ package com.animoto.android.dgv;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -34,7 +33,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     public static float childRatio = .9f;
     protected int colCount, childSize, padding, dpi = 0;
     protected float lastDelta = 0;
-    protected Handler handler = new Handler();
     // dragging vars
     protected int dragged = -1, lastX = -1, lastY = -1, lastTarget = -1;
     protected boolean enabled = true, touching = false;
