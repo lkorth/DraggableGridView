@@ -15,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -26,7 +25,7 @@ import com.animoto.android.dgvSample.GridItem;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class DraggableGridView extends AdapterView implements
+public class DraggableGridView extends AdapterView<DraggableGridViewAdapter> implements
 View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // layout vars
     private static final int TOP_ROW_PADDING = 4;
@@ -105,7 +104,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
      */
 
     @Override
-    public void setAdapter(Adapter adapter) {
+    public void setAdapter(DraggableGridViewAdapter adapter) {
         if (!(adapter instanceof DraggableGridViewAdapter)) throw new IllegalArgumentException("DraggableGridView requires an adapter that is a subclass of DraggableGridViewAdapter");
         this.mAdapter = (DraggableGridViewAdapter) adapter;
         this.onRearrangeListener = (OnRearrangeListener) adapter;
@@ -113,7 +112,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     @Override
-    public Adapter getAdapter() {
+    public DraggableGridViewAdapter getAdapter() {
         return mAdapter;
     }
 
