@@ -56,9 +56,11 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     protected int dragged = -1, lastX = -1, lastY = -1, lastTarget = -1;
     protected boolean enabled = true, touching = false;
     protected ArrayList<Integer> newPositions = new ArrayList<Integer>();
-    // listeners
+
+    /* OnItemClickListener */
     private OnItemClickListener onItemClickListener;
 
+    /* Adapter */
     protected DraggableGridViewAdapter mAdapter;
 
     public DraggableGridView(Context context, AttributeSet attrs) {
