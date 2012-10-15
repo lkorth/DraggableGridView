@@ -186,8 +186,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     protected void reorderChildren() {
-        if (mAdapter != null)
-            mAdapter.onRearrange(dragged, lastTarget);
+        mAdapter.onRearrange(dragged, lastTarget);
 
         if (lastTarget < dragged) {
             for (int i = 0; i < getChildCount(); i++) {
