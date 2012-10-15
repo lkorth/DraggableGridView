@@ -149,9 +149,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         //Loop through all the children; relayout the ones that should stay; remove the ones that are no longer in our range.
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            int childPositionInData = -1;
-
-            childPositionInData = ((GridItem) child).getPositionInData();
+            int childPositionInData = ((GridItem) child).getPositionInData();
 
 
             if (childPositionInData == dragged)
