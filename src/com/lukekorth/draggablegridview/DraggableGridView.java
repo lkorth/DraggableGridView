@@ -118,6 +118,11 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // LAYOUT
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        if(mAdapter == null)
+            return;
+
         // compute width of view, in dp
         float w = (right - left) / (dpi / 160f); // 160 is standard dpi and represents
         // conversion rate from google.
