@@ -39,6 +39,8 @@ import java.util.HashSet;
 public class DraggableGridView extends AdapterView<DraggableGridViewAdapter> implements
 View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // layout vars
+    private static final int TOP_ROW = 0;
+    private static final int BOTTOM_ROW = 4;
     private static final int TOP_ROW_PADDING = 4;
     private static final int BOTTOM_ROW_PADDING = 4;
 
@@ -136,17 +138,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         childSize = Math.round(childSize * childRatio);
         padding = ((right - left) - (childSize * colCount)) / (colCount + 1);
 
-        int topRow = 0;
-        int bottomRow = 4;
-        // Log.i("dgv", "Row Height = " + rowHeight + "; Top Row = " + topRow +
-        // "; View Heigh = + " + dgvHeight + "; bottomRow = " + bottomRow);
-
-        int topRowLoaded = topRow; // the top row loaded, including any padding of rows at the beginning.
-        int bottomRowLoaded = bottomRow; // Will also include any padding later for perf
-        int firstCellPosition = Math.max(0, (topRowLoaded - TOP_ROW_PADDING)
-                * colCount);
-        int finalCellPosition = Math.min(mAdapter.getCount() - 1,
-                (bottomRowLoaded + BOTTOM_ROW_PADDING) * colCount);
+        int firstCellPosition = Math.max(0, (TOP_ROW - TOP_ROW_PADDING) * colCount);
+        int finalCellPosition = Math.min(mAdapter.getCount() - 1, (BOTTOM_ROW + BOTTOM_ROW_PADDING) * colCount);
 
         HashSet<Integer> addedPositions = new HashSet<Integer>();
 
