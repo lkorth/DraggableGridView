@@ -268,8 +268,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     protected int getTargetFromCoor(int x, int y) {
         if (getColOrRowFromCoor(y) == -1) // touch is between rows
             return -1;
-        if (getIndexFromCoor(x, y) != -1) //touch on top of another visual
-            return -1;
 
         int leftPos = getIndexFromCoor(x - (childSize / 4), y);
         int rightPos = getIndexFromCoor(x + (childSize / 4), y);
