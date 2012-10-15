@@ -179,7 +179,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 continue;
             if (!addedPositions.contains(new Integer(i)) && i >= 0 && i < totalAvailableCells && getIndexFromPositionInData(i) == -1) {
                 addedPositions.add(new Integer(i));
-                //Log.i("dgv", "Now creating view for position: " + i);
+                //Log.i(LOG_TAG, "Now creating view for position: " + i);
                 View child = mAdapter.getView(i, null, this);
                 LayoutParams params = child.getLayoutParams();
                 if (params == null) {
@@ -200,12 +200,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 int pos = getPositionInData(i);
                 if (pos >= lastTarget && pos < dragged) {
                     ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(pos +1));
-                    Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos + 1));
+                    Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + (pos + 1));
                 }
                 else if (pos == dragged)
                 {
                     ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(lastTarget));
-                    Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
+                    Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
         }
@@ -215,11 +215,11 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 int pos = getPositionInData(i);
                 if (pos > dragged && pos <= lastTarget) {
                     ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(pos - 1));
-                    Log.i("dgv", "Changing photo at pos " + pos + " to pos " + (pos - 1));
+                    Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + (pos - 1));
                 }
                 else if (pos == dragged) {
                     ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(lastTarget));
-                    Log.i("dgv", "Changing photo at pos " + pos + " to pos " + lastTarget);
+                    Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
             invalidate();
@@ -314,7 +314,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // EVENT HANDLERS
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-        Log.i("dgv", "clicked: " + position);
+        Log.i(LOG_TAG, "clicked: " + position);
         if (onItemClickListener != null) {
             onItemClickListener.onItemClick(adapter, view, position, id);
         }
@@ -421,7 +421,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     protected void animateGap(int target) {
-        Log.i("dgv", "Starting gap animation with dragged: " + dragged);
+        Log.i(LOG_TAG, "Starting gap animation with dragged: " + dragged);
         for (int i = 0; i < getChildCount(); i++) {
             int pos = getPositionInData(i);
             View v = getChildAt(i);
@@ -433,7 +433,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
             else if (target < dragged && pos >= target && pos < dragged)
                 newPos++;
 
-            //Log.i("dgv", "Animating view with position: " + pos);
+            //Log.i(LOG_TAG, "Animating view with position: " + pos);
 
             // animate
             int oldPos = pos;

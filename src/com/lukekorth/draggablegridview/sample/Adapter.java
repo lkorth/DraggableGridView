@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lukekorth.draggablegridview.DraggableGridView;
 import com.lukekorth.draggablegridview.DraggableGridViewAdapter;
 import com.lukekorth.draggablegridview.GridItem;
 
@@ -78,6 +79,7 @@ public class Adapter extends DraggableGridViewAdapter {
         return null;
     }
 
+    @Override
     public int getIcon(int position){
         return icons.get(position);
     }
@@ -86,7 +88,7 @@ public class Adapter extends DraggableGridViewAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         int item = icons.get(position);
 
-        Log.i("dgv", "position: " + position + " icon: " + item);
+        Log.i(DraggableGridView.LOG_TAG, "position: " + position + " icon: " + item);
 
         GridItem icon = (GridItem) layoutInflater.inflate(R.layout.grid_item, null);
 
@@ -101,7 +103,7 @@ public class Adapter extends DraggableGridViewAdapter {
         icons.remove(oldIndex);
         icons.add(newIndex, movingIcon);
         notifyDataSetChanged();
-        Log.i("dgv", "New Order: " + icons.toString());
+        Log.i(DraggableGridView.LOG_TAG, "New Order: " + icons.toString());
     }
 
 }
