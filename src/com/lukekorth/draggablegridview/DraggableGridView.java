@@ -431,8 +431,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
             else if (target < dragged && pos >= target && pos < dragged)
                 newPos++;
 
-            Log.i(LOG_TAG, "Animating view with position: " + pos);
-
             // animate
             int oldPos = pos;
             if (newPositions.get(pos) != -1)
