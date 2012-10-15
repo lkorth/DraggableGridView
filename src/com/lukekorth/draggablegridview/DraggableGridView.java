@@ -141,10 +141,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         // Log.i("dgv", "Row Height = " + rowHeight + "; Top Row = " + topRow +
         // "; View Heigh = + " + dgvHeight + "; bottomRow = " + bottomRow);
 
-        int topRowLoaded = topRow; // the top row loaded, including any padding
-        // of rows at the beginning.
-        int bottomRowLoaded = bottomRow; // Will also include any padding later
-        // for perf.
+        int topRowLoaded = topRow; // the top row loaded, including any padding of rows at the beginning.
+        int bottomRowLoaded = bottomRow; // Will also include any padding later for perf
         int firstCellPosition = Math.max(0, (topRowLoaded - TOP_ROW_PADDING)
                 * colCount);
         int finalCellPosition = Math.min(mAdapter.getCount() - 1,
