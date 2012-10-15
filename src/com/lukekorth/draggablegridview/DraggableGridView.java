@@ -202,8 +202,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                     ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(pos +1));
                     Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + (pos + 1));
                 }
-                else if (pos == dragged)
-                {
+                else if (pos == dragged) {
                     ((GridItem) getChildAt(i)).setIcon(mAdapter.getIcon(lastTarget));
                     Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
