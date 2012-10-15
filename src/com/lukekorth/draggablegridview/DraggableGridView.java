@@ -38,7 +38,8 @@ import java.util.HashSet;
 
 public class DraggableGridView extends AdapterView<DraggableGridViewAdapter> implements
 View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
-    // layout vars
+
+    /* Number of rows and amount of padding */
     private static final int TOP_ROW = 0;
     private static final int BOTTOM_ROW = 4;
     private static final int TOP_ROW_PADDING = 4;
