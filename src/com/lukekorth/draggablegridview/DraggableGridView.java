@@ -165,7 +165,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 child.invalidate();
                 addedPositions.add(new Integer(childPositionInData));
             } else {
-                this.removeViewInLayout(child);
+                removeViewInLayout(child);
             }
         }
 
@@ -180,7 +180,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 if (params == null) {
                     params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 }
-                this.addViewInLayout(child, -1, params);
+                addViewInLayout(child, -1, params);
                 child.measure(MeasureSpec.makeMeasureSpec(child.getLayoutParams().width, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec( child.getLayoutParams().height, MeasureSpec.UNSPECIFIED));
             }
         }
