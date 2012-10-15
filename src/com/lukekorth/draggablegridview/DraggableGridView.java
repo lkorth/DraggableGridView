@@ -268,8 +268,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
         int leftPos = getIndexFromCoor(x - (childSize / 4), y);
         int rightPos = getIndexFromCoor(x + (childSize / 4), y);
-        if (leftPos == -1 && rightPos == -1) // touch is in the middle of
-            // nowhere
+        if (leftPos == -1 && rightPos == -1) // touch is in the middle of nowhere
             return -1;
         if (leftPos == rightPos) // touch is in the middle of a visual
             return -1;
