@@ -24,7 +24,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import com.lukekorth.draggablegridview.DraggableGridView;
-import com.lukekorth.draggablegridview.sample.R;
 
 public class DraggableGridViewSampleActivity extends Activity implements OnItemClickListener {
 
@@ -34,7 +33,7 @@ public class DraggableGridViewSampleActivity extends Activity implements OnItemC
         setContentView(R.layout.main);
 
         DraggableGridView dgv = ((DraggableGridView)findViewById(R.id.vgv));
-        dgv.setAdapter(new DraggableGridViewAdapter(this));
+        dgv.setAdapter(new Adapter(this));
         dgv.setOnItemClickListener(this);
     }
 

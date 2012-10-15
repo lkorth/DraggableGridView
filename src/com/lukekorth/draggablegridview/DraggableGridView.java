@@ -33,7 +33,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
-import com.lukekorth.draggablegridview.sample.DraggableGridViewAdapter;
 import java.util.ArrayList;
 import java.util.HashSet;
 

@@ -21,11 +21,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
+import com.lukekorth.draggablegridview.DraggableGridViewAdapter;
+import com.lukekorth.draggablegridview.GridItem;
 
 import java.util.LinkedList;
 
-public class DraggableGridViewAdapter extends BaseAdapter {
+public class Adapter extends DraggableGridViewAdapter {
 
     public static final int[] mImages = {
         R.drawable.sample_img_1, R.drawable.sample_img_2,
@@ -55,7 +57,7 @@ public class DraggableGridViewAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private LinkedList<Integer> icons;
 
-    public DraggableGridViewAdapter(Context context) {
+    public Adapter(Context context) {
         super();
         mContext = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -81,11 +83,6 @@ public class DraggableGridViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int item = icons.get(position);
 
@@ -98,6 +95,7 @@ public class DraggableGridViewAdapter extends BaseAdapter {
         return icon;
     }
 
+    @Override
     public void onRearrange(int oldIndex, int newIndex) {
         int movingIcon = icons.get(oldIndex);
         icons.remove(oldIndex);
