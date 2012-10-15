@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.lukekorth.draggablegridview.sample.GridItem xmlns:android="http://schemas.android.com/apk/res/android"
+<com.lukekorth.draggablegridview.GridItem xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
@@ -35,4 +35,4 @@
 	    android:textAppearance="?android:attr/textAppearanceMedium" >
 
 	</TextView>
-</com.lukekorth.draggablegridview.sample.GridItem>
+</com.lukekorth.draggablegridview.GridItem>

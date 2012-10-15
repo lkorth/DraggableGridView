@@ -34,8 +34,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
 import com.lukekorth.draggablegridview.sample.DraggableGridViewAdapter;
-import com.lukekorth.draggablegridview.sample.GridItem;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
