@@ -45,7 +45,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     private static final int TOP_ROW_PADDING = 4;
     private static final int BOTTOM_ROW_PADDING = 4;
 
-    public static String LOG_TAG = "dgv";
+    public static String LOG_TAG = "DraggableGridView";
     public static float childRatio = .9f;
     protected int colCount, childSize, padding, dpi = 0;
     protected float lastDelta = 0;
