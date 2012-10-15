@@ -103,19 +103,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         throw new UnsupportedOperationException("Not supported");
     }
 
-    // OVERRIDES
-    @Override
-    public void addView(View child) {
-        super.addView(child);
-        newPositions.add(-1);
-    };
-
-    @Override
-    public void removeViewAt(int index) {
-        super.removeViewAt(index);
-        newPositions.remove(index);
-    };
-
     @Override
     public boolean addViewInLayout(View child, int index, LayoutParams params) {
         newPositions.add(-1);
