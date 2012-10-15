@@ -459,6 +459,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     @Override
     public void setOnItemClickListener(OnItemClickListener l){
-        this.onItemClickListener = l;
+        onItemClickListener = l;
     }
 }
