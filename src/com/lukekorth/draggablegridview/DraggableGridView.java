@@ -70,9 +70,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         setChildrenDrawingOrderEnabled(true);
 
         DisplayMetrics metrics = new DisplayMetrics();
-        ((Activity) context).getWindowManager().getDefaultDisplay()
-        .getMetrics(metrics);
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
         dpi = metrics.densityDpi;
+
         Log.i(LOG_TAG, "finished creating DraggableGridView widget");
     }
 
