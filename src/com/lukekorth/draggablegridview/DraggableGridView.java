@@ -111,7 +111,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         return super.addViewInLayout(child, index, params);
     }
 
-    // LAYOUT
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
@@ -120,16 +119,15 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
             return;
 
         // compute width of view, in dp
-        float w = (right - left) / (dpi / 160f); // 160 is standard dpi and represents
-        // conversion rate from google.
+        float width = (right - left) / (dpi / 160f); // 160 is standard dpi and represents conversion rate from google.
 
         // determine number of columns, at least 2
         colCount = 2;
         int sub = 240; // 240 dip units will be taken up by each column.
-        w -= 280; // assuming each column starts off taking 140 dip.
-        while (w > 0) {
+        width -= 280; // assuming each column starts off taking 140 dip.
+        while (width > 0) {
             colCount++;
-            w -= sub;
+            width -= sub;
             sub += 40;
         }
 
