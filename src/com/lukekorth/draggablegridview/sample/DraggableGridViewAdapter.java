@@ -23,12 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.lukekorth.draggablegridview.OnRearrangeListener;
-import com.lukekorth.draggablegridview.sample.R;
-
 import java.util.LinkedList;
 
-public class DraggableGridViewAdapter extends BaseAdapter implements OnRearrangeListener {
+public class DraggableGridViewAdapter extends BaseAdapter {
 
     public static final int[] mImages = {
         R.drawable.sample_img_1, R.drawable.sample_img_2,
@@ -101,7 +98,6 @@ public class DraggableGridViewAdapter extends BaseAdapter implements OnRearrange
         return icon;
     }
 
-    @Override
     public void onRearrange(int oldIndex, int newIndex) {
         int movingIcon = icons.get(oldIndex);
         icons.remove(oldIndex);

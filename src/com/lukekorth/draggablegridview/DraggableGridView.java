@@ -56,7 +56,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     public static int animT = 150;
     protected ArrayList<Integer> newPositions = new ArrayList<Integer>();
     // listeners
-    protected OnRearrangeListener onRearrangeListener;
     private OnItemClickListener onItemClickListener;
 
     protected DraggableGridViewAdapter mAdapter;
@@ -82,7 +81,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     @Override
     public void setAdapter(DraggableGridViewAdapter adapter) {
         mAdapter = adapter;
-        onRearrangeListener = adapter;
         requestLayout();
     }
 
@@ -205,8 +203,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     protected void reorderChildren() {
-        if (onRearrangeListener != null)
-            onRearrangeListener.onRearrange(dragged, lastTarget);
+        if (mAdapter != null)
+            mAdapter.onRearrange(dragged, lastTarget);
 
         if (lastTarget < dragged)
             for (int i = 0; i < getChildCount(); i++)
