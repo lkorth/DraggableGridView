@@ -57,7 +57,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     protected DraggableGridViewAdapter mAdapter;
 
-    // CONSTRUCTOR AND HELPERS
     public DraggableGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOnTouchListener(this);
@@ -71,13 +70,10 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         Log.i(LOG_TAG, "finished creating DraggableGridView widget");
     }
 
-    /*******************************************************************************************************
-     * Adapter view overrides
-     */
-
     @Override
     public void setAdapter(DraggableGridViewAdapter adapter) {
         mAdapter = adapter;
+        removeAllViewsInLayout();
         requestLayout();
     }
 
@@ -87,13 +83,13 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     @Override
-    public View getSelectedView() {
-        return null;
+    public void setSelection(int position) {
+        throw new UnsupportedOperationException("Not supported");
     }
 
     @Override
-    public void setSelection(int position) {
-
+    public View getSelectedView() {
+        throw new UnsupportedOperationException("Not supported");
     }
 
     // OVERRIDES
