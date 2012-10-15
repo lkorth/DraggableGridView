@@ -117,9 +117,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     // LAYOUT
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // compute width of view, in dp
-        float w = (r - l) / (dpi / 160f); // 160 is standard dpi and represents
+        float w = (right - left) / (dpi / 160f); // 160 is standard dpi and represents
         // conversion rate from google.
 
         // determine number of columns, at least 2
@@ -133,9 +133,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         }
 
         // determine childSize and padding, in px
-        childSize = (r - l) / colCount;
+        childSize = (right - left) / colCount;
         childSize = Math.round(childSize * childRatio);
-        padding = ((r - l) - (childSize * colCount)) / (colCount + 1);
+        padding = ((right - left) - (childSize * colCount)) / (colCount + 1);
 
         int topRow = 0;
         int bottomRow = 4;
