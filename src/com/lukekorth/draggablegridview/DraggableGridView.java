@@ -154,7 +154,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         int finalCellPosition = Math.min(mAdapter.getCount() - 1,
                 (bottomRowLoaded + BOTTOM_ROW_PADDING) * colCount);
 
-        HashSet addedPositions = new HashSet();
+        HashSet<Integer> addedPositions = new HashSet<Integer>();
 
         int totalAvailableCells = mAdapter.getCount();
 
