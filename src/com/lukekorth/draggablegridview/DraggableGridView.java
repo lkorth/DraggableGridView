@@ -74,6 +74,11 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     @Override
+    public void setOnItemClickListener(OnItemClickListener l){
+        onItemClickListener = l;
+    }
+
+    @Override
     public void setAdapter(DraggableGridViewAdapter adapter) {
         mAdapter = adapter;
         removeAllViewsInLayout();
@@ -454,10 +459,5 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     public int getLastIndex() {
         return getIndexFromCoor(lastX, lastY);
-    }
-
-    @Override
-    public void setOnItemClickListener(OnItemClickListener l){
-        onItemClickListener = l;
     }
 }
