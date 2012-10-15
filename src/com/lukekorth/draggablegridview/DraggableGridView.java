@@ -140,9 +140,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         childSize = Math.round(childSize * childRatio);
         padding = ((r - l) - (childSize * colCount)) / (colCount + 1);
 
-        int rowHeight = childSize + 2 * padding;
         int topRow = 0;
-        int dgvHeight = this.getHeight();
         int bottomRow = 4;
         // Log.i("dgv", "Row Height = " + rowHeight + "; Top Row = " + topRow +
         // "; View Heigh = + " + dgvHeight + "; bottomRow = " + bottomRow);
@@ -196,7 +194,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                     params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 }
                 this.addViewInLayout(child, -1, params);
-                Point xy = getCoorFromIndex(i); // This probably needs to be renormalized based on what is being shown.
                 child.measure(MeasureSpec.makeMeasureSpec(child.getLayoutParams().width, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec( child.getLayoutParams().height, MeasureSpec.UNSPECIFIED));
             }
         }
