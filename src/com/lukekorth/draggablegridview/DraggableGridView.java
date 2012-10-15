@@ -286,8 +286,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         if (dragged < target)
             return target - 1;
 
-        // Toast.makeText(getContext(), "Target: " + target + ".",
-        // Toast.LENGTH_SHORT).show();
+        Log.i(LOG_TAG, "Target: " + target);
         return target;
     }
 
@@ -432,7 +431,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
             else if (target < dragged && pos >= target && pos < dragged)
                 newPos++;
 
-            //Log.i(LOG_TAG, "Animating view with position: " + pos);
+            Log.i(LOG_TAG, "Animating view with position: " + pos);
 
             // animate
             int oldPos = pos;
