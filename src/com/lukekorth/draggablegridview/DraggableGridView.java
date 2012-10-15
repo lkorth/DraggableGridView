@@ -196,6 +196,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                     Log.i(LOG_TAG, "Changing photo at pos " + pos + " to pos " + lastTarget);
                 }
             }
+            invalidate();
+            onLayout(true, getLeft(), getTop(), getRight(), getBottom());
         }
         else if (dragged < lastTarget) {
             for (int i = 0; i < getChildCount(); i++) {
