@@ -45,6 +45,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     private static final int TOP_ROW_PADDING = 4;
     private static final int BOTTOM_ROW_PADDING = 4;
 
+    /* Speed of animation */
+    private static final int ANIMATION_TIME = 150;
+
     public static String LOG_TAG = "DraggableGridView";
     public static float childRatio = .9f;
     protected int colCount, childSize, padding, dpi = 0;
@@ -52,8 +55,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     // dragging vars
     protected int dragged = -1, lastX = -1, lastY = -1, lastTarget = -1;
     protected boolean enabled = true, touching = false;
-    // anim vars
-    public static int animT = 150;
     protected ArrayList<Integer> newPositions = new ArrayList<Integer>();
     // listeners
     private OnItemClickListener onItemClickListener;
@@ -405,9 +406,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         AnimationSet animSet = new AnimationSet(true);
         ScaleAnimation scale = new ScaleAnimation(.667f, 1, .667f, 1,
                 childSize * 3 / 4, childSize * 3 / 4);
-        scale.setDuration(animT);
+        scale.setDuration(ANIMATION_TIME);
         AlphaAnimation alpha = new AlphaAnimation(1, .5f);
-        alpha.setDuration(animT);
+        alpha.setDuration(ANIMATION_TIME);
 
         animSet.addAnimation(scale);
         animSet.addAnimation(alpha);
@@ -447,7 +448,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
             Point newOffset = new Point(newXY.x - v.getLeft(), newXY.y - v.getTop());
 
             TranslateAnimation translate = new TranslateAnimation(Animation.ABSOLUTE, oldOffset.x, Animation.ABSOLUTE, newOffset.x, Animation.ABSOLUTE, oldOffset.y, Animation.ABSOLUTE, newOffset.y);
-            translate.setDuration(animT);
+            translate.setDuration(ANIMATION_TIME);
             translate.setFillEnabled(true);
             translate.setFillAfter(true);
             v.clearAnimation();
