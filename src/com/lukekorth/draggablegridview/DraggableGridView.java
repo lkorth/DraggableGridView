@@ -51,7 +51,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     /* Child scaling ratio */
     private static final float CHILD_RATIO = 0.9f;
 
-    public static String LOG_TAG = "DraggableGridView";
+    public static final String LOG_TAG = "DraggableGridView";
+
     protected int colCount, childSize, padding, dpi = 0;
     protected float lastDelta = 0;
     // dragging vars
