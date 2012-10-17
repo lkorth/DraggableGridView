@@ -365,6 +365,9 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                         ((ImageView) v).setAlpha(255);
                     lastTarget = -1;
                     dragged = -1;
+                } else {
+                    int position = getLastIndex();
+                    onItemClick(this, getChildAt(position), position, 0);
                 }
                 touching = false;
                 break;
