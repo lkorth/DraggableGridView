@@ -185,7 +185,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         }
     }
 
-    protected void reorderChildren() {
+    private void reorderChildren() {
         mAdapter.onRearrange(dragged, lastTarget);
 
         if (lastTarget < dragged) {
@@ -222,7 +222,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         }
     }
 
-    protected Point getCoorFromIndex(int index) {
+    private Point getCoorFromIndex(int index) {
         int col = index % columnCount;
         int row = index / columnCount;
         return new Point(padding + (childSize + padding) * col, padding
@@ -241,7 +241,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         return i;
     }
 
-    public int getIndexFromCoor(int x, int y) {
+    private int getIndexFromCoor(int x, int y) {
         int col = getColOrRowFromCoor(x), row = getColOrRowFromCoor(y);
         if (col == -1 || row == -1) // touch is between columns or rows
             return -1;
@@ -251,7 +251,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         return index;
     }
 
-    protected int getColOrRowFromCoor(int coor) {
+    private int getColOrRowFromCoor(int coor) {
         coor -= padding;
         for (int i = 0; coor > 0; i++) {
             if (coor < childSize)
@@ -261,7 +261,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         return -1;
     }
 
-    protected int getTargetFromCoor(int x, int y) {
+    private int getTargetFromCoor(int x, int y) {
         if (getColOrRowFromCoor(y) == -1) // touch is between rows
             return -1;
 
@@ -284,18 +284,11 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         return target;
     }
 
-    protected int getPositionInData(int index) {
+    private int getPositionInData(int index) {
         return ((GridItem) getChildAt(index)).getPositionInData();
     }
 
-    public int getIndexOf(View child) {
-        for (int i = 0; i < getChildCount(); i++)
-            if (getChildAt(i) == child)
-                return i;
-        return -1;
-    }
-
-    public int getIndexFromPositionInData(int positionInData) {
+    private int getIndexFromPositionInData(int positionInData) {
         for (int i = 0; i < getChildCount(); i++){
             if (((GridItem) getChildAt(i)).getPositionInData() == positionInData)
                 return i;
@@ -389,7 +382,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     // EVENT HELPERS
-    protected void animateDragged() {
+    private void animateDragged() {
         View v = getChildAt(getIndexFromPositionInData(dragged));
         Point coor = getCoorFromIndex(dragged);
         int x = coor.x + childSize / 2, y = coor.y + childSize / 2;
@@ -412,7 +405,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         invalidate();
     }
 
-    protected void animateGap(int target) {
+    private void animateGap(int target) {
         Log.i(LOG_TAG, "Starting gap animation with dragged: " + dragged);
         for (int i = 0; i < getChildCount(); i++) {
             int pos = getPositionInData(i);
@@ -448,7 +441,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         }
     }
 
-    public int getLastIndex() {
+    private int getLastIndex() {
         return getIndexFromCoor(lastX, lastY);
     }
 }
