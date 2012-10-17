@@ -377,7 +377,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         return false;
     }
 
-    // EVENT HELPERS
     private void animateDragged() {
         View v = getChildAt(getIndexFromPositionInData(dragged));
         Point coor = getCoorFromIndex(dragged);
