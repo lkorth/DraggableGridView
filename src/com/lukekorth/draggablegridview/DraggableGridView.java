@@ -170,7 +170,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
                 continue;
             if (!addedPositions.contains(new Integer(i)) && i >= 0 && i < totalAvailableCells && getIndexFromPositionInData(i) == -1) {
                 addedPositions.add(new Integer(i));
-                //Log.i(LOG_TAG, "Now creating view for position: " + i);
+                Log.i(LOG_TAG, "Now creating view for position: " + i);
                 View child = mAdapter.getView(i, null, this);
                 LayoutParams params = child.getLayoutParams();
                 if (params == null) {
