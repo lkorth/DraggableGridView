@@ -136,7 +136,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         if(mAdapter == null)
             return;
 
-        int firstCellPosition = Math.max(0, (TOP_ROW - TOP_ROW_PADDING) * columnCount);
+        int firstCellPosition = 0;
         int finalCellPosition = Math.min(mAdapter.getCount() - 1, (BOTTOM_ROW + BOTTOM_ROW_PADDING) * columnCount);
 
         HashSet<Integer> addedPositions = new HashSet<Integer>();
