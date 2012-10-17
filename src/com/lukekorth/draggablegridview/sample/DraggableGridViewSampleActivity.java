@@ -18,6 +18,7 @@ package com.lukekorth.draggablegridview.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -39,6 +40,7 @@ public class DraggableGridViewSampleActivity extends Activity implements OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+        Log.i(DraggableGridView.LOG_TAG, "Clicked!");
         Toast.makeText(this, "Click position " + position, Toast.LENGTH_SHORT);
     }
 
