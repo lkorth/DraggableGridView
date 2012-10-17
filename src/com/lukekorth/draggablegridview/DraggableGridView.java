@@ -48,8 +48,10 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     /* Speed of animation */
     private static final int ANIMATION_TIME = 150;
 
+    /* Child scaling ratio */
+    private static final float CHILD_RATIO = 0.9f;
+
     public static String LOG_TAG = "DraggableGridView";
-    public static float childRatio = .9f;
     protected int colCount, childSize, padding, dpi = 0;
     protected float lastDelta = 0;
     // dragging vars
@@ -131,7 +133,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
         // determine childSize and padding, in px
         childSize = (right - left) / colCount;
-        childSize = Math.round(childSize * childRatio);
+        childSize = Math.round(childSize * CHILD_RATIO);
         padding = ((right - left) - (childSize * colCount)) / (colCount + 1);
 
         int firstCellPosition = Math.max(0, (TOP_ROW - TOP_ROW_PADDING) * colCount);
