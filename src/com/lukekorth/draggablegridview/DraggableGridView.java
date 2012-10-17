@@ -88,6 +88,11 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
             sub += 40;
         }
 
+        // determine childSize and padding, in px
+        childSize = metrics.widthPixels / columnCount;
+        childSize = Math.round(childSize * CHILD_RATIO);
+        padding = (metrics.widthPixels - (childSize * columnCount)) / (columnCount + 1);
+
         Log.i(LOG_TAG, "finished creating DraggableGridView widget");
     }
 
@@ -130,11 +135,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
         if(mAdapter == null)
             return;
-
-        // determine childSize and padding, in px
-        childSize = (right - left) / columnCount;
-        childSize = Math.round(childSize * CHILD_RATIO);
-        padding = ((right - left) - (childSize * columnCount)) / (columnCount + 1);
 
         int firstCellPosition = Math.max(0, (TOP_ROW - TOP_ROW_PADDING) * columnCount);
         int finalCellPosition = Math.min(mAdapter.getCount() - 1, (BOTTOM_ROW + BOTTOM_ROW_PADDING) * columnCount);
