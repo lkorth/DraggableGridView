@@ -32,7 +32,7 @@ public class DraggableGridViewSampleActivity extends Activity implements OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        DraggableGridView dgv = ((DraggableGridView) findViewById(R.id.vgv));
+        DraggableGridView dgv = ((DraggableGridView) findViewById(R.id.draggable_grid_view));
         dgv.setAdapter(new Adapter(this));
         dgv.setOnItemClickListener(this);
     }
