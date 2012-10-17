@@ -74,7 +74,19 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
         DisplayMetrics metrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        dpi = metrics.densityDpi;
+
+        // compute width of view, in dp
+        float dpWidth = metrics.widthPixels / metrics.density;
+
+        // determine number of columns, at least 2
+        columnCount = 2;
+        int sub = 240; // 240 dip units will be taken up by each column.
+        dpWidth -= 280; // assuming each column starts off taking 140 dip.
+        while (dpWidth > 0) {
+            columnCount++;
+            dpWidth -= sub;
+            sub += 40;
+        }
 
         Log.i(LOG_TAG, "finished creating DraggableGridView widget");
     }
@@ -118,19 +130,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
         if(mAdapter == null)
             return;
-
-        // compute width of view, in dp
-        float width = (right - left) / (dpi / 160f); // 160 is standard dpi and represents conversion rate from google.
-
-        // determine number of columns, at least 2
-        colCount = 2;
-        int sub = 240; // 240 dip units will be taken up by each column.
-        width -= 280; // assuming each column starts off taking 140 dip.
-        while (width > 0) {
-            colCount++;
-            width -= sub;
-            sub += 40;
-        }
 
         // determine childSize and padding, in px
         childSize = (right - left) / columnCount;
