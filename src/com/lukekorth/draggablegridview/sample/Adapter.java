@@ -92,7 +92,7 @@ public class Adapter extends DraggableGridViewAdapter {
 
         GridItem icon = (GridItem) layoutInflater.inflate(R.layout.grid_item, null);
 
-        icon.setIcon(position);
+        icon.setIcon(item);
 
         return icon;
     }
