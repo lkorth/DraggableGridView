@@ -71,7 +71,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         setOnTouchListener(this);
         setOnLongClickListener(this);
         setChildrenDrawingOrderEnabled(true);
+        init(context);
 
+        Log.i(LOG_TAG, "finished creating DraggableGridView widget");
+    }
+
+    private void init(Context context) {
         DisplayMetrics metrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -92,8 +97,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         childSize = metrics.widthPixels / columnCount;
         childSize = Math.round(childSize * CHILD_RATIO);
         padding = (metrics.widthPixels - (childSize * columnCount)) / (columnCount + 1);
-
-        Log.i(LOG_TAG, "finished creating DraggableGridView widget");
     }
 
     @Override
