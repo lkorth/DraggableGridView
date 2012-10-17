@@ -48,9 +48,6 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     /* Speed of animation */
     private static final int ANIMATION_TIME = 150;
 
-    /* Child scaling ratio */
-    private static final float CHILD_RATIO = 0.9f;
-
     public static final String LOG_TAG = "DraggableGridView";
 
     protected int columnCount, childSize, padding = 0;
@@ -95,7 +92,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
         // determine childSize and padding, in px
         childSize = metrics.widthPixels / columnCount;
-        childSize = Math.round(childSize * CHILD_RATIO);
+        childSize = Math.round(childSize * 0.9f);
         padding = (metrics.widthPixels - (childSize * columnCount)) / (columnCount + 1);
     }
 
