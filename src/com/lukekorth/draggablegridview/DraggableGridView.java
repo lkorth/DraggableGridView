@@ -53,7 +53,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
 
     public static final String LOG_TAG = "DraggableGridView";
 
-    protected int colCount, childSize, padding, dpi = 0;
+    protected int columnCount, childSize, padding = 0;
     protected float lastDelta = 0;
     // dragging vars
     protected int dragged = -1, lastX = -1, lastY = -1, lastTarget = -1;
@@ -133,12 +133,12 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         }
 
         // determine childSize and padding, in px
-        childSize = (right - left) / colCount;
+        childSize = (right - left) / columnCount;
         childSize = Math.round(childSize * CHILD_RATIO);
-        padding = ((right - left) - (childSize * colCount)) / (colCount + 1);
+        padding = ((right - left) - (childSize * columnCount)) / (columnCount + 1);
 
-        int firstCellPosition = Math.max(0, (TOP_ROW - TOP_ROW_PADDING) * colCount);
-        int finalCellPosition = Math.min(mAdapter.getCount() - 1, (BOTTOM_ROW + BOTTOM_ROW_PADDING) * colCount);
+        int firstCellPosition = Math.max(0, (TOP_ROW - TOP_ROW_PADDING) * columnCount);
+        int finalCellPosition = Math.min(mAdapter.getCount() - 1, (BOTTOM_ROW + BOTTOM_ROW_PADDING) * columnCount);
 
         HashSet<Integer> addedPositions = new HashSet<Integer>();
 
@@ -221,8 +221,8 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
     }
 
     protected Point getCoorFromIndex(int index) {
-        int col = index % colCount;
-        int row = index / colCount;
+        int col = index % columnCount;
+        int row = index / columnCount;
         return new Point(padding + (childSize + padding) * col, padding
                 + (childSize + padding) * row);
     }
@@ -243,7 +243,7 @@ View.OnTouchListener, OnItemClickListener, View.OnLongClickListener {
         int col = getColOrRowFromCoor(x), row = getColOrRowFromCoor(y);
         if (col == -1 || row == -1) // touch is between columns or rows
             return -1;
-        int index = row * colCount + col;
+        int index = row * columnCount + col;
         if (index >= mAdapter.getCount())
             return -1;
         return index;
